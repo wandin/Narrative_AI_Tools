@@ -139,7 +139,7 @@ Dialogue generation is abstracted behind a provider interface.
 
 The project was tested using:
 
-- **phi-3-mini-4k-instruct** - see the **ULLMResponseProvider** class
+- **phi-3-mini-4k-instruct** - see the `ULLMResponseProvider` class
 
 Other instruct-style models may work, but smaller or poorly aligned models may occasionally violate formatting constraints.
 
@@ -169,6 +169,19 @@ The runtime system communicates with the local LLM using Unreal’s HTTP module.
 This ensures production-safe integration without blocking gameplay or editor workflows.
 
 ---
+
+## LLM Configuration
+
+The local language model is accessed through a dedicated response provider:
+
+- `ULLMResponseProvider`
+
+Key configuration values are defined directly in code:
+
+```
+static const FString LLM_URL = TEXT("http://127.0.0.1:1234/api/v1/chat");
+static const FString LLM_MODEL = TEXT("phi-3-mini-4k-instruct");
+````
 
 ## Debugging & Diagnostics
 
