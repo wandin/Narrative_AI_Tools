@@ -120,10 +120,53 @@ Dialogue generation is abstracted behind a provider interface.
 
 ### Provider Architecture Enables
 
-- Mock providers for testing
 - Offline or deterministic providers
 - Future cloud or hybrid integrations
 - Easy replacement without touching gameplay code
+
+
+## Running with a Local LLM (LM Studio)
+
+**This demo is designed to run entirely **offline** using a local Large Language Model.**
+
+### Requirements
+
+- **LM Studio**
+- An OpenAI-compatible local model
+- Unreal Engine **5.7**
+
+### Recommended Model
+
+The project was tested using:
+
+- **phi-3-mini-4k-instruct** - see the **ULLMResponseProvider** class
+
+Other instruct-style models may work, but smaller or poorly aligned models may occasionally violate formatting constraints.
+
+---
+
+### Setup Instructions
+
+1. Install **LM Studio**
+2. Download and load the model:
+    - `phi-3-mini-4k-instruct`
+3. Start the local server with:
+    - **OpenAI-compatible API enabled**
+4. Ensure the server is running at: http://127.0.0.1:1234
+  
+No API keys or cloud services are required.
+
+---
+
+### How Unreal Connects to the LLM
+
+The runtime system communicates with the local LLM using Unreal’s HTTP module.
+
+- Requests are sent asynchronously
+- Responses return safely to the **Game Thread**
+- The system remains stable during PIE and editor shutdown
+
+This ensures production-safe integration without blocking gameplay or editor workflows.
 
 ---
 
